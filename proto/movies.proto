@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package movies;
+
+service MoviesService { 
+    rpc createSchedule (CreateScheduleRequest) returns (CreateScheduleResponse) {}
+    rpc createMovie (CreateMovieRequest) returns (CreateMovieResponse) {}
+    rpc getMovies (GetMoviesRequest) returns (GetMoviesResponse) {}
+}
+
+message Error {
+    int32 code = 1;
+    string message = 2;
+}
+
+message Movie {
+    string name = 1;
+    string image = 2;
+    string trailer = 3;
+    string description = 4;
+    string restriction = 5;
+}
+
+message Empty {};
+
+message CreateScheduleRequest{
+    string hour = 1;
+}
+message CreateScheduleResponse{
+    optional Error error = 1;
+}
+
+message CreateMovieRequest{
+    Movie movies = 1;
+}
+message CreateMovieResponse{
+    optional Error error = 1;
+}
+
+message GetMoviesRequest{
+    string limit = 1;
+    string filterBy = 2;
+}
+message GetMoviesResponse{
+    repeated Movie movies = 1;
+}
